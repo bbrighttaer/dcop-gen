@@ -1,0 +1,65 @@
+inputs:
+  origin: pd-dcop-sim-file
+events:
+- id: w0
+  delay: 1
+- id: e1
+  actions:
+  - type: random-variable-change
+    variable_name: y2
+  - id: w1
+    delay: 1
+- id: e2
+  actions:
+  - type: random-variable-change
+    variable_name: y1
+  - id: w2
+    delay: 1
+- id: e3
+  actions:
+  - type: random-variable-change
+    variable_name: y2
+  - id: w3
+    delay: 1
+- id: e4
+  actions:
+  - type: random-variable-change
+    variable_name: y1
+  - id: w4
+    delay: 1
+- id: e5
+  actions:
+  - type: random-variable-change
+    variable_name: y2
+  - id: w5
+    delay: 1
+- id: e6
+  actions:
+  - type: random-variable-change
+    variable_name: y2
+  - id: w6
+    delay: 1
+- id: e7
+  actions:
+  - type: random-variable-change
+    variable_name: y2
+  - id: w7
+    delay: 1
+- id: e8
+  actions:
+  - type: random-variable-change
+    variable_name: y1
+  - id: w8
+    delay: 1
+- id: e9
+  actions:
+  - type: random-variable-change
+    variable_name: y1
+  - id: w9
+    delay: 1
+- id: e10
+  actions:
+  - type: random-variable-change
+    variable_name: y1
+  - id: w10
+    delay: 1
