@@ -1,0 +1,5 @@
+nodes=2
+commands=add_agent:0 add_agent:1 add_agent:2 change_constraint:0-1:5-3-7
+edges=0,1 0,2
+cons=(0,1):(1,1,1)>(0,2):(1,1,1)
+domains=0:15,12,1 1:15,12,1 2:3,4,1
