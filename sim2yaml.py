@@ -17,9 +17,9 @@ def parse_constraint(con_str):
     return func, differentials
 
 
-def main(args):
+def main(file, name):
     lines_4_config = {}
-    with open(args.file, 'r') as f:
+    with open(file, 'r') as f:
         line = f.readline()
         while line:
             kv = line.split('=')
@@ -27,7 +27,7 @@ def main(args):
             line = f.readline()
 
     yaml_dict = {
-        'name': args.name,
+        'name': name,
         'objective': 'min',
     }
 
@@ -68,7 +68,7 @@ def main(args):
 
     # export to yaml
     os.makedirs('./yaml-files', exist_ok=True)
-    exported_file = args.file.split('/')[-1] + '.yaml'
+    exported_file = file.split('/')[-1] + '.yaml'
     yaml_file = os.path.join('./yaml-files', exported_file)
     with open(yaml_file, 'w') as f:
         yaml.dump(yaml_dict, f)
@@ -95,7 +95,7 @@ def main(args):
             })
 
     scenarios = {'events': events}
-    exported_file = args.file.split('/')[-1] + '-scenario.yaml'
+    exported_file = file.split('/')[-1] + '-scenario.yaml'
     yaml_file = os.path.join('./yaml-files', exported_file)
     with open(yaml_file, 'w') as f:
         yaml.dump(scenarios, f)
@@ -103,10 +103,12 @@ def main(args):
 
 
 if __name__ == '__main__':
-    parser = argparse.ArgumentParser(description='Convert DynaGraph sim file to pyDCOP compatible yaml config')
-    parser.add_argument('-f', '--file', type=str, required=True, help='sim file path')
-    parser.add_argument('-n', '--name', type=str, required=True, help='DCOP name')
+    # parser = argparse.ArgumentParser(description='Convert DynaGraph sim file to pyDCOP compatible yaml config')
+    # parser.add_argument('-f', '--file', type=str, required=True, help='sim file path')
+    # parser.add_argument('-n', '--name', type=str, required=True, help='DCOP name')
+    #
+    # args = parser.parse_args()
 
-    args = parser.parse_args()
-
-    main(args)
+    sim_files = {f: os.path.join('simulations', f) for f in os.listdir('simulations')}
+    for file in sim_files:
+        main(sim_files[file], file)
