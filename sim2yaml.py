@@ -75,30 +75,31 @@ def main(args):
         print(f'Simulation config file saved: {yaml_file}')
 
     # create scenario file
-    # events = [{
-    #     'id': 'w',
-    #     'delay': 1,
-    # }]
-    # scenarios = {'events': events}
-    # for i, cmd in enumerate(lines_4_config['commands'].split(' ')):
-    #     cmd, agent = cmd.split(':')
-    #     if cmd == 'remove_agent':  # only agent removal is supported by pydcop
-    #         events.append({
-    #             'id': f'e{i}',
-    #             'actions': {
-    #                 'type': cmd,
-    #                 'agent': f'a{agent}'
-    #             }
-    #         })
-    #         events.append({
-    #             'id': 'w',
-    #             'delay': 1,
-    #         })
-    # exported_file = args.file.split('/')[-1] + '-scenario.yaml'
-    # yaml_file = os.path.join('./yaml-files', exported_file)
-    # with open(yaml_file, 'w') as f:
-    #     yaml.dump(scenarios, f)
-    #     print(f'Simulation scenario file saved: {yaml_file}')
+    events = [{
+        'id': 'w0',
+        'delay': 1,
+    }]
+    for i, cmd in enumerate(lines_4_config['commands'].split(' ')):
+        if 'add_agent' in cmd or 'remove_agent' in cmd:
+            cmd, agent = cmd.split(':')
+            events.append({
+                'id': f'e{i}',
+                'actions': [{
+                    'type': cmd,
+                    'agent': f'a{agent}'
+                }]
+            })
+            events.append({
+                'id': f'w{i + 1}',
+                'delay': 12,
+            })
+
+    scenarios = {'events': events}
+    exported_file = args.file.split('/')[-1] + '-scenario.yaml'
+    yaml_file = os.path.join('./yaml-files', exported_file)
+    with open(yaml_file, 'w') as f:
+        yaml.dump(scenarios, f)
+        print(f'Simulation scenario file saved: {yaml_file}')
 
 
 if __name__ == '__main__':

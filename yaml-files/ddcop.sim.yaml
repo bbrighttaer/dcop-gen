@@ -1,4 +1,4 @@
-name: cocoa-test
+name: test-ddcop
 objective: min
 domains:
   d0:
